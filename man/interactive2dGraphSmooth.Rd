@@ -1,0 +1,39 @@
+% Auto-generated: do not edit by hand
+\name{interactive2dGraphSmooth}
+
+\alias{interactive2dGraphSmooth}
+
+\title{interactive_2d_graph_smooth component}
+
+\description{
+
+}
+
+\usage{
+interactive2dGraphSmooth(id=NULL, data=NULL, height=NULL, smoothingFactor=NULL,
+smoothingType=NULL, width=NULL, xLabel=NULL, yLabel=NULL)
+}
+
+\arguments{
+\item{id}{Character. }
+
+\item{data}{List of lists containing elements 'x', 'y'.
+those elements have the following types:
+  - x (numeric; required)
+  - y (numeric; required)s. }
+
+\item{height}{Numeric. }
+
+\item{smoothingFactor}{Numeric. }
+
+\item{smoothingType}{Character. }
+
+\item{width}{Numeric. }
+
+\item{xLabel}{Character. }
+
+\item{yLabel}{Character. }
+}
+
+\value{named list of JSON elements corresponding to React.js properties and their values}
+
