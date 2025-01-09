@@ -151,7 +151,7 @@ const InteractiveBarGraph = ({ id, width, height, xLabel, yLabel, data, setProps
                   .duration(200)
                   // Return to original style
                   .attr('r', 4)
-                  .attr('fill', 'green');
+                  .attr('fill', 'blue');
             })
             .call(
                 d3.drag()
