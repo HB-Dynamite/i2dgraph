@@ -75,21 +75,25 @@ app.layout = html.Div(
             value=None,  # Let the component infer by default
             labelStyle={"display": "inline-block", "margin-right": "10px"},
         ),
-        html.Button("Print Data", id="print-button"),
-        html.Div(id="data-output"),
-        interactive_graph(
-            id="graph-switcher",
-            width=900,
-            height=700,
-            xLabel="Categories",
-            yLabel="Values",
-            data=data_set_cats,
-            chartType=None,
-            smoothingType="bellcurve",
-            # Let the component infer by default
-            # Example of passing additional props:
-            # colorScheme="viridis",
-            # animationDuration=500,
+        dash.html.Div(
+            id="graph-div",
+            children=[
+                interactive_graph(
+                    id="graph-switcher",
+                    # width=900,
+                    # height=700,
+                    xLabel="Categories",
+                    yLabel="Values",
+                    data=data_set_cats,
+                    chartType=None,
+                    smoothingType="bellcurve",
+                    # Let the component infer by default
+                    # Example of passing additional props:
+                    # colorScheme="viridis",
+                    # animationDuration=500,
+                )
+            ],
+            style={"width": 600, "height": 400},
         ),
     ]
 )
@@ -103,17 +107,6 @@ def update_graph(value, chart_type):
     data = data_options[value]
     # If chart_type is None, the component will infer
     return data, chart_type
-
-
-@app.callback(
-    Output("data-output", "children"),
-    [Input("print-button", "n_clicks")],
-    [State("graph-switcher", "data")],
-)
-def print_data(n_clicks, current_data):
-    if n_clicks:
-        return f"Current Data: {current_data}"
-    return ""
 
 
 @app.callback(

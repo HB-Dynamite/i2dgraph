@@ -6,13 +6,12 @@
 \title{interactive_graph component}
 
 \description{
-
+This parent component measures its own container size then passes numeric width & height to the child graph.
 }
 
 \usage{
-interactiveGraph(id=NULL, chartType=NULL, data=NULL, height=NULL,
-smoothingFactor=NULL, smoothingType=NULL, width=NULL,
-xLabel=NULL, yLabel=NULL)
+interactiveGraph(id=NULL, chartType=NULL, data=NULL, smoothingFactor=NULL,
+smoothingType=NULL, style=NULL, xLabel=NULL, yLabel=NULL)
 }
 
 \arguments{
@@ -25,13 +24,11 @@ those elements have the following types:
   - x (character | numeric; required)
   - y (numeric; required)s. }
 
-\item{height}{Numeric. }
-
 \item{smoothingFactor}{Numeric. }
 
 \item{smoothingType}{Character. }
 
-\item{width}{Numeric. }
+\item{style}{Named list. }
 
 \item{xLabel}{Character. }
 
