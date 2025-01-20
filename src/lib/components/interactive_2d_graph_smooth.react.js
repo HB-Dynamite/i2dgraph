@@ -2,7 +2,7 @@ import React, { useRef, useEffect, useState } from 'react';
 import * as d3 from 'd3';
 import PropTypes from 'prop-types';
 
-const Interactive2DGraph = ({ id, width, height, xLabel, yLabel, data, smoothingType, smoothingFactor,setProps }) => {
+const Interactive2DGraph = ({ id, width, height, xLabel, yLabel, data, smoothingType, smoothingFactor,setProps, mainDataColor, additionalData, additionalDataColor }) => {
     const  [hoveredCircle, setHoveredCircle] = useState(null);  
     const svgRef = useRef(null);
 
@@ -96,13 +96,27 @@ const Interactive2DGraph = ({ id, width, height, xLabel, yLabel, data, smoothing
             .x(d => xScale(d.x))
             .y(d => yScale(d.y));
 
-        // Add line
+        
+        // Add main line
         chart.append('path')
             .datum(sorteddata)
             .attr('fill', 'none')
-            .attr('stroke', 'black')
+            .attr('stroke', mainDataColor)
             .attr('stroke-width', 2)
             .attr('d', lineGenerator);
+
+        // Add additional lines
+        if (additionalData && additionalData.length > 0) {
+            additionalData.forEach((lineData, i) => {
+                const lineColor = additionalDataColor[i] || 'black';
+                chart.append('path')
+                    .datum(lineData)
+                    .attr('fill', 'none')
+                    .attr('stroke', lineColor)
+                    .attr('stroke-width', 2)
+                    .attr('d', lineGenerator);
+            });
+        }
 
         // Axes
         const xAxis = d3.axisBottom(xScale).ticks(10);
@@ -274,12 +288,21 @@ Interactive2DGraph.propTypes = {
     data: PropTypes.arrayOf(
         PropTypes.shape({
             x: PropTypes.number.isRequired,
-            y: PropTypes.number.isRequired
+            y: PropTypes.number.isRequired,
         })
     ),
+    mainDataColor: PropTypes.string, // color of the main dragable data points
     smoothingType: PropTypes.string,
     smoothingFactor: PropTypes.number,
-    setProps: PropTypes.func
+    setProps: PropTypes.func,
+    additionalData: PropTypes.arrayOf(
+        PropTypes.shape({
+            x: PropTypes.number,
+            y: PropTypes.number,
+        })
+    ),
+    additionalDataColor: PropTypes.arrayOf(PropTypes.string) // list of colors for addtional lines 
+
 };
 
 Interactive2DGraph.defaultProps = {
@@ -297,7 +320,11 @@ Interactive2DGraph.defaultProps = {
         { x: 450, y: 250 },
         { x: 550, y: 300 },
         { x: -100, y: -100 },
-    ]
+    ],
+    mainDataColor: 'blue', // Default color for main data
+    additionalData: [], // default is a empty array
+    additionalDataColor: [], // default is a empty array
+    
 };
 
 export default Interactive2DGraph;

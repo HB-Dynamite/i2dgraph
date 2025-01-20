@@ -11,6 +11,16 @@ Keyword arguments:
 
 - id (string; required)
 
+- additionalData (list of dicts; optional)
+
+    `additionalData` is a list of list of dicts with keys:
+
+    - x (string | number; optional)
+
+    - y (number; optional)s
+
+- additionalDataColor (list of strings; optional)
+
 - data (list of dicts; default [    { x: "cat", y: 50 },    { x: "dog", y: 100 },    { x: "human", y: 150 },    { x: "whale", y: 200 },    { x: "bear", y: 250 },    { x: "chimp", y: 300 },    { x: "Tiger", y: -100 },])
 
     `data` is a list of dicts with keys:
@@ -20,6 +30,8 @@ Keyword arguments:
     - y (number; required)
 
 - height (number; default 500)
+
+- mainDataColor (string; default "blue")
 
 - width (number; default 500)
 
@@ -31,10 +43,10 @@ Keyword arguments:
     _namespace = 'i2dgraph'
     _type = 'interactive_bar_chart'
     @_explicitize_args
-    def __init__(self, id=Component.REQUIRED, width=Component.UNDEFINED, height=Component.UNDEFINED, xLabel=Component.UNDEFINED, yLabel=Component.UNDEFINED, data=Component.UNDEFINED, **kwargs):
-        self._prop_names = ['id', 'data', 'height', 'width', 'xLabel', 'yLabel']
+    def __init__(self, id=Component.REQUIRED, width=Component.UNDEFINED, height=Component.UNDEFINED, xLabel=Component.UNDEFINED, yLabel=Component.UNDEFINED, data=Component.UNDEFINED, mainDataColor=Component.UNDEFINED, additionalData=Component.UNDEFINED, additionalDataColor=Component.UNDEFINED, **kwargs):
+        self._prop_names = ['id', 'additionalData', 'additionalDataColor', 'data', 'height', 'mainDataColor', 'width', 'xLabel', 'yLabel']
         self._valid_wildcard_attributes =            []
-        self.available_properties = ['id', 'data', 'height', 'width', 'xLabel', 'yLabel']
+        self.available_properties = ['id', 'additionalData', 'additionalDataColor', 'data', 'height', 'mainDataColor', 'width', 'xLabel', 'yLabel']
         self.available_wildcard_properties =            []
         _explicit_args = kwargs.pop('_explicit_args')
         _locals = locals()

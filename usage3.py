@@ -1,12 +1,10 @@
-# %%import dash
+# %%
 import dash
 import math
-from dash import html, dcc, Input, Output, State
-import random
-
-# Import the new InteractiveGraphSwitcher component
+from dash import html, dcc, Input, Output
 from i2dgraph import interactive_graph
 
+# Initialize the app
 app = dash.Dash(__name__)
 
 # Sample datasets
@@ -39,7 +37,6 @@ data_set_mix = [
 
 random_points = [{"x": i, "y": math.sin(i / 10)} for i in range(0, 100, 1)]
 
-
 data_options = {
     "Categorical": data_set_cats,
     "Continuous": data_set_nums,
@@ -47,6 +44,7 @@ data_options = {
     "Random": random_points,
 }
 
+# App layout
 app.layout = html.Div(
     [
         html.H1("Interactive Graph Switcher Test"),
@@ -59,64 +57,70 @@ app.layout = html.Div(
         dcc.RadioItems(
             id="smoothing-type-radio",
             options=[
-                {"label": "bellcurve", "value": "bellcurve"},
-                {"label": "linear", "value": "linear"},
-                {"label": "constant", "value": "constant"},
+                {"label": "Bellcurve", "value": "bellcurve"},
+                {"label": "Linear", "value": "linear"},
+                {"label": "Constant", "value": "constant"},
             ],
-            value=None,  # Let the component infer by default
+            value="bellcurve",  # Default smoothing type
             labelStyle={"display": "inline-block", "margin-right": "10px"},
         ),
         dcc.RadioItems(
             id="chart-type-radio",
             options=[
-                {"label": "Cat", "value": "categorical"},
-                {"label": "num", "value": "numerical"},
+                {"label": "Categorical", "value": "categorical"},
+                {"label": "Numerical", "value": "numerical"},
             ],
             value=None,  # Let the component infer by default
             labelStyle={"display": "inline-block", "margin-right": "10px"},
         ),
-        dash.html.Div(
+        html.Div(
             id="graph-div",
             children=[
                 interactive_graph(
                     id="graph-switcher",
-                    # width=900,
-                    # height=700,
                     xLabel="Categories",
                     yLabel="Values",
-                    data=data_set_cats,
+                    data=random_points,
                     chartType=None,
                     smoothingType="bellcurve",
-                    # Let the component infer by default
-                    # Example of passing additional props:
-                    # colorScheme="viridis",
-                    # animationDuration=500,
+                    mainDataColor="blue",
+                    additionalData=[random_points],
+                    additionalDataColor=["red"],  # Pass a list of colors
                 )
             ],
-            style={"width": 600, "height": 400},
+            style={"width": "600px", "height": "400px"},
         ),
     ]
 )
 
 
 @app.callback(
-    [Output("graph-switcher", "data"), Output("graph-switcher", "chartType")],
+    [
+        Output("graph-switcher", "data"),
+        Output("graph-switcher", "chartType"),
+    ],
     [Input("data-dropdown", "value"), Input("chart-type-radio", "value")],
 )
-def update_graph(value, chart_type):
-    data = data_options[value]
-    # If chart_type is None, the component will infer
-    return data, chart_type
+def update_graph(selected_dataset, selected_chart_type):
+    """
+    Update the graph's dataset and chart type based on user selection.
+    """
+    data = data_options[selected_dataset]
+    return data, selected_chart_type
 
 
 @app.callback(
-    Output("graph-switcher", "smoothingType"), [Input("smoothing-type-radio", "value")]
+    Output("graph-switcher", "smoothingType"),
+    [Input("smoothing-type-radio", "value")],
 )
-def update_smoothing_type(value):
-    return value
+def update_smoothing_type(selected_smoothing_type):
+    """
+    Update the smoothing type for the graph.
+    """
+    return selected_smoothing_type
 
 
+# Run the app
 if __name__ == "__main__":
     app.run_server(debug=True)
-
 # %%

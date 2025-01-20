@@ -2,7 +2,7 @@ import React, { useRef, useEffect } from 'react';
 import * as d3 from 'd3';
 import PropTypes from 'prop-types';
 
-const InteractiveBarGraph = ({ id, width, height, xLabel, yLabel, data, setProps }) => {
+const InteractiveBarGraph = ({ id, width, height, xLabel, yLabel, data,mainDataColor, additionalData, additionalDataColor, setProps }) => {
     const svgRef = useRef(null);
 
     const margin = { top: 20, right: 20, bottom: 60, left: 60 };
@@ -90,6 +90,22 @@ const InteractiveBarGraph = ({ id, width, height, xLabel, yLabel, data, setProps
             .selectAll('line')
             .attr('stroke', '#ddd');
 
+        // Draw vertical lines for addtional data
+            if (additionalData && additionalData.length > 0) {
+                additionalData.forEach((dataset, i) => {
+                    chart.selectAll('.additional-line')
+                        .data(dataset)
+                        .enter()
+                        .append('line')
+                        .attr('class', '.additional-line')
+                        .attr('x1', d => xScale(d.x) + xScale.bandwidth() / 2)
+                        .attr('y1', d => yScale(d.y))
+                        .attr('x2', d => xScale(d.x) + xScale.bandwidth() / 2)
+                        .attr('y2', yScale(0))
+                        .attr('stroke', additionalDataColor[i])
+                        .attr('stroke-width', 4);
+                });
+            };
         // Draw vertical lines from each point down to y=0
         chart.selectAll('.vertical-line')
             .data(data)
@@ -100,8 +116,9 @@ const InteractiveBarGraph = ({ id, width, height, xLabel, yLabel, data, setProps
             .attr('y1', d => yScale(d.y))
             .attr('x2', d => xScale(d.x) + xScale.bandwidth() / 2)
             .attr('y2', yScale(0))
-            .attr('stroke', 'black')
+            .attr('stroke', mainDataColor)
             .attr('stroke-width', 2);
+
 
         // Axes
         const xAxis = d3.axisBottom(xScale);
@@ -198,6 +215,16 @@ InteractiveBarGraph.propTypes = {
             y: PropTypes.number.isRequired
         })
     ),
+    mainDataColor: PropTypes.string,
+    additionalData: PropTypes.arrayOf(
+        PropTypes.arrayOf(
+            PropTypes.shape({
+                x: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+                y: PropTypes.number
+            })
+        )
+    ),
+    additionalDataColor: PropTypes.arrayOf(PropTypes.string),
     setProps: PropTypes.func
 };
 
@@ -214,7 +241,9 @@ InteractiveBarGraph.defaultProps = {
         { x: "bear", y: 250 },
         { x: "chimp", y: 300 },
         { x: "Tiger", y: -100 },
-    ]
+    ],
+    additionalData: [], // default is a empty array
+    mainDataColor: "blue", // default main color is blue
 };
 
 export default InteractiveBarGraph;

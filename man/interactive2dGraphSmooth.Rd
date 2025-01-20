@@ -10,12 +10,21 @@
 }
 
 \usage{
-interactive2dGraphSmooth(id=NULL, data=NULL, height=NULL, smoothingFactor=NULL,
-smoothingType=NULL, width=NULL, xLabel=NULL, yLabel=NULL)
+interactive2dGraphSmooth(id=NULL, additionalData=NULL, additionalDataColor=NULL,
+data=NULL, height=NULL, mainDataColor=NULL,
+smoothingFactor=NULL, smoothingType=NULL, width=NULL,
+xLabel=NULL, yLabel=NULL)
 }
 
 \arguments{
 \item{id}{Character. }
+
+\item{additionalData}{List of lists containing elements 'x', 'y'.
+those elements have the following types:
+  - x (numeric; optional)
+  - y (numeric; optional)s. }
+
+\item{additionalDataColor}{List of characters. }
 
 \item{data}{List of lists containing elements 'x', 'y'.
 those elements have the following types:
@@ -23,6 +32,8 @@ those elements have the following types:
   - y (numeric; required)s. }
 
 \item{height}{Numeric. }
+
+\item{mainDataColor}{Character. }
 
 \item{smoothingFactor}{Numeric. }
 

@@ -1,6 +1,6 @@
 Package: i2dgraph
 Title: simple 2d graph with dragable points
-Version: 0.0.1
+Version: 0.0.2
 Description: simple 2d graph with dragable points
 Depends: R (>= 3.0.2)
 Imports: 

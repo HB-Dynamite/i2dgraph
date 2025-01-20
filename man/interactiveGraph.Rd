@@ -10,12 +10,21 @@ This parent component measures its own container size then passes numeric width 
 }
 
 \usage{
-interactiveGraph(id=NULL, chartType=NULL, data=NULL, smoothingFactor=NULL,
-smoothingType=NULL, style=NULL, xLabel=NULL, yLabel=NULL)
+interactiveGraph(id=NULL, additionalData=NULL, additionalDataColor=NULL,
+chartType=NULL, data=NULL, mainDataColor=NULL,
+smoothingFactor=NULL, smoothingType=NULL, style=NULL,
+xLabel=NULL, yLabel=NULL)
 }
 
 \arguments{
 \item{id}{Character. }
+
+\item{additionalData}{List of list of lists containing elements 'x', 'y'.
+those elements have the following types:
+  - x (character | numeric; optional)
+  - y (numeric; optional)ss. }
+
+\item{additionalDataColor}{List of characters. }
 
 \item{chartType}{A value equal to: 'categorical', 'continuous'. }
 
@@ -23,6 +32,8 @@ smoothingType=NULL, style=NULL, xLabel=NULL, yLabel=NULL)
 those elements have the following types:
   - x (character | numeric; required)
   - y (numeric; required)s. }
+
+\item{mainDataColor}{Character. }
 
 \item{smoothingFactor}{Numeric. }
 

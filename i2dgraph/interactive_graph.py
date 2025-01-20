@@ -12,6 +12,16 @@ Keyword arguments:
 
 - id (string; required)
 
+- additionalData (list of dicts; optional)
+
+    `additionalData` is a list of list of dicts with keys:
+
+    - x (string | number; optional)
+
+    - y (number; optional)s
+
+- additionalDataColor (list of strings; optional)
+
 - chartType (a value equal to: 'categorical', 'continuous'; optional)
 
 - data (list of dicts; optional)
@@ -21,6 +31,8 @@ Keyword arguments:
     - x (string | number; required)
 
     - y (number; required)
+
+- mainDataColor (string; default 'blue')
 
 - smoothingFactor (number; default 0.1)
 
@@ -36,10 +48,10 @@ Keyword arguments:
     _namespace = 'i2dgraph'
     _type = 'interactive_graph'
     @_explicitize_args
-    def __init__(self, id=Component.REQUIRED, chartType=Component.UNDEFINED, data=Component.UNDEFINED, xLabel=Component.UNDEFINED, yLabel=Component.UNDEFINED, smoothingType=Component.UNDEFINED, smoothingFactor=Component.UNDEFINED, style=Component.UNDEFINED, **kwargs):
-        self._prop_names = ['id', 'chartType', 'data', 'smoothingFactor', 'smoothingType', 'style', 'xLabel', 'yLabel']
+    def __init__(self, id=Component.REQUIRED, chartType=Component.UNDEFINED, data=Component.UNDEFINED, mainDataColor=Component.UNDEFINED, additionalData=Component.UNDEFINED, additionalDataColor=Component.UNDEFINED, xLabel=Component.UNDEFINED, yLabel=Component.UNDEFINED, smoothingType=Component.UNDEFINED, smoothingFactor=Component.UNDEFINED, style=Component.UNDEFINED, **kwargs):
+        self._prop_names = ['id', 'additionalData', 'additionalDataColor', 'chartType', 'data', 'mainDataColor', 'smoothingFactor', 'smoothingType', 'style', 'xLabel', 'yLabel']
         self._valid_wildcard_attributes =            []
-        self.available_properties = ['id', 'chartType', 'data', 'smoothingFactor', 'smoothingType', 'style', 'xLabel', 'yLabel']
+        self.available_properties = ['id', 'additionalData', 'additionalDataColor', 'chartType', 'data', 'mainDataColor', 'smoothingFactor', 'smoothingType', 'style', 'xLabel', 'yLabel']
         self.available_wildcard_properties =            []
         _explicit_args = kwargs.pop('_explicit_args')
         _locals = locals()

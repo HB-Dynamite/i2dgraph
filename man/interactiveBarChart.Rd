@@ -10,12 +10,20 @@
 }
 
 \usage{
-interactiveBarChart(id=NULL, data=NULL, height=NULL, width=NULL, xLabel=NULL,
-yLabel=NULL)
+interactiveBarChart(id=NULL, additionalData=NULL, additionalDataColor=NULL,
+data=NULL, height=NULL, mainDataColor=NULL, width=NULL,
+xLabel=NULL, yLabel=NULL)
 }
 
 \arguments{
 \item{id}{Character. }
+
+\item{additionalData}{List of list of lists containing elements 'x', 'y'.
+those elements have the following types:
+  - x (character | numeric; optional)
+  - y (numeric; optional)ss. }
+
+\item{additionalDataColor}{List of characters. }
 
 \item{data}{List of lists containing elements 'x', 'y'.
 those elements have the following types:
@@ -23,6 +31,8 @@ those elements have the following types:
   - y (numeric; required)s. }
 
 \item{height}{Numeric. }
+
+\item{mainDataColor}{Character. }
 
 \item{width}{Numeric. }
 

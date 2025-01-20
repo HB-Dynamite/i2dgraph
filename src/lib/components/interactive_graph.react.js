@@ -6,6 +6,7 @@ import { useResizeObserver } from '../hooks/useResizeObserver';
 // Child components (unchanged)
 import Interactive_2d_graph_smooth from './interactive_2d_graph_smooth.react';
 import Interactive_bar_chart from './interactive_bar_chart.react';
+import { add } from 'ramda';
 
 /**
  * This parent component measures its own container size
@@ -15,6 +16,9 @@ export default function InteractiveGraph({
   id,
   chartType,
   data,
+  mainDataColor,
+  additionalData,
+  additionalDataColor,
   xLabel,
   yLabel,
   smoothingType,
@@ -51,6 +55,9 @@ export default function InteractiveGraph({
           xLabel={xLabel}
           yLabel={yLabel}
           data={data}
+          mainDataColor={mainDataColor}
+          additionalData={additionalData}
+          additionalDataColor={additionalDataColor}
           setProps={setProps}
         />
       );
@@ -63,6 +70,9 @@ export default function InteractiveGraph({
           xLabel={xLabel}
           yLabel={yLabel}
           data={data}
+          mainDataColor={mainDataColor}
+          additionalData={additionalData}
+          additionalDataColor={additionalDataColor}
           smoothingType={smoothingType}
           smoothingFactor={smoothingFactor}
           setProps={setProps}
@@ -94,7 +104,20 @@ InteractiveGraph.propTypes = {
     PropTypes.shape({
       x: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
       y: PropTypes.number.isRequired
-    })
+    }), 
+    
+    ),
+  mainDataColor: PropTypes.string,
+  additionalData: PropTypes.arrayOf(
+    PropTypes.arrayOf(
+        PropTypes.shape({
+        x: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+        y: PropTypes.number
+        })
+    ),
+    ),
+  additionalDataColor: PropTypes.arrayOf(
+    PropTypes.string,
   ),
   xLabel: PropTypes.string,
   yLabel: PropTypes.string,
@@ -111,5 +134,7 @@ InteractiveGraph.defaultProps = {
   yLabel: 'Y Label',
   smoothingType: 'bellcurve',
   smoothingFactor: 0.1,
-  style: {}
+  style: {},
+  mainDataColor: 'blue', // Default color for the primary dataset
+
 };
