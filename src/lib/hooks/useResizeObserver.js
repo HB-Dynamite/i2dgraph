@@ -24,6 +24,6 @@ export function useResizeObserver(ref) {
       resizeObserver.disconnect();
     };
   }, [ref]);
-  print(dimensions)
+  //print(dimensions)
   return dimensions;
 }

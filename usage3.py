@@ -122,5 +122,5 @@ def update_smoothing_type(selected_smoothing_type):
 
 # Run the app
 if __name__ == "__main__":
-    app.run_server(debug=True)
+    app.run_server(debug=False)
 # %%
