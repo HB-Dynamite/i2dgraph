@@ -3,7 +3,7 @@ module I2dgraph
 using Dash
 
 const resources_path = realpath(joinpath( @__DIR__, "..", "deps"))
-const version = "0.0.3"
+const version = "0.0.5"
 
 include("jl/interactive_2d_graph_smooth.jl")
 include("jl/interactive_bar_chart.jl")
@@ -18,14 +18,14 @@ function __init__()
             [
                 DashBase.Resource(
     relative_package_path = "async-interactive_2d_graph.js",
-    external_url = "https://unpkg.com/i2dgraph@0.0.3/i2dgraph/async-interactive_2d_graph.js",
+    external_url = "https://unpkg.com/i2dgraph@0.0.5/i2dgraph/async-interactive_2d_graph.js",
     dynamic = nothing,
     async = :true,
     type = :js
 ),
 DashBase.Resource(
     relative_package_path = "async-interactive_2d_graph.js.map",
-    external_url = "https://unpkg.com/i2dgraph@0.0.3/i2dgraph/async-interactive_2d_graph.js.map",
+    external_url = "https://unpkg.com/i2dgraph@0.0.5/i2dgraph/async-interactive_2d_graph.js.map",
     dynamic = true,
     async = nothing,
     type = :js

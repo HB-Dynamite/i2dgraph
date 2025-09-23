@@ -1,6 +1,6 @@
 {
   "name": "i2dgraph",
-  "version": "0.0.3",
+  "version": "0.0.5",
   "description": "simple 2d graph with dragable points",
   "main": "build/index.js",
   "scripts": {

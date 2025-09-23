@@ -2,7 +2,7 @@ import React, { useRef, useEffect, useState } from 'react';
 import * as d3 from 'd3';
 import PropTypes from 'prop-types';
 
-const Interactive2DGraph = ({ id, width, height, xLabel, yLabel, data, smoothingType, smoothingFactor,setProps, mainDataColor, additionalData, additionalDataColor }) => {
+const Interactive2DGraph = ({ id, width, height, xLabel, yLabel, data, smoothingType, smoothingFactor,setProps, mainDataColor, additionalData, additionalDataColor, addpoints }) => {
     const  [hoveredCircle, setHoveredCircle] = useState(null);  
     const svgRef = useRef(null);
 
@@ -198,6 +198,14 @@ const Interactive2DGraph = ({ id, width, height, xLabel, yLabel, data, smoothing
         
             return frac;
         };
+        // Draw points
+        const addpoints = chart.selectAll('circle')
+            .data(addpoints)
+            .join('circle')
+            .attr('cx', (d) => xScale(d.x))
+            .attr('cy', (d) => yScale(d.y))
+            .attr('r', 7)
+            .attr('fill', '')
 
         // Draw circles
         const circles = chart.selectAll('circle')

@@ -2,7 +2,7 @@
 name = "I2dgraph"
 uuid = "1b08a953-4be3-4667-9a23-2c46b3bf5b73"
 authors = ["Lasse Bohlen <emil.bohlen@gmail.com>"]
-version = "0.0.3"
+version = "0.0.5"
 
 [deps]
 Dash = "1b08a953-4be3-4667-9a23-3db579824955"
